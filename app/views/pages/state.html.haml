@@ -1,15 +1,18 @@
-%h1= params[:id]
+%h1
+  = title_content do
+    Zuwendungen in
+    = params[:id]
 
 %h2 Top 50 Empfänger
 
-%table
+%table.table.table-striped
   %thead
-    %th Jahr
-    %th Förderungen
-    %th Summe
+    %th Empfänger
+    %th.number Anzahl
+    %th.number Summe
   %tbody
-  - Donation.where(state: params[:id]).grouped_by_recipients.order("amount DESC").limit(50).each do |row|
-    %tr
-      %td= link_to row.recipient, donations_path(recipient: row.recipient)
-      %td= row.count
-      %td= number_to_currency row.amount
+    - Donation.where(state: params[:id]).grouped_by_recipients.order("amount DESC").limit(50).each do |row|
+      %tr
+        %td= link_to row.recipient, donations_path(recipient: row.recipient)
+        %td.number= row.count
+        %td.number= number_to_currency row.amount

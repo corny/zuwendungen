@@ -1,0 +1,14 @@
+%header.container
+  .navbar.navbar-default
+    .navbar-header
+      %button.navbar-toggle{ type: :button, data: { toggle: 'collapse', target: '#nav-main' } }
+        %span.icon-bar
+        %span.icon-bar
+        %span.icon-bar
+      = link_to :root, class: 'navbar-brand' do
+        Zuwendungen
+
+    .navbar-collapse.collapse#nav-main
+      %ul.nav.navbar-nav
+        - uniq_states.each do |state|
+          %li= link_to state, state_path(state)

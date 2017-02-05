@@ -2,18 +2,18 @@
 
 %h2 Bundesländer
 
-- Donation.states.each do |state|
+- uniq_states.each do |state|
   %h3= state
 
-  %table
+  %table.table.table-striped
     %thead
       %th Jahr
-      %th Förderungen
-      %th Summe
+      %th.number Anzahl
+      %th.number Summe
     %tbody
       - Donation.where(state: state).grouped_by_year.each do |row|
         %tr
           %td= row.year.to_i
-          %td= number_with_delimiter row.count
-          %td= number_to_currency row.amount
+          %td.number= number_with_delimiter row.count
+          %td.number= number_to_currency row.amount
           %td= link_to "Details", state_path(state)
