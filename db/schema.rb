@@ -19,7 +19,7 @@ ActiveRecord::Schema.define(version: 20170205135452) do
     t.date    "date_begin",                          null: false
     t.date    "date_end",                            null: false
     t.string  "state",                               null: false
-    t.integer "number"
+    t.string  "number"
     t.string  "donor",                               null: false
     t.string  "recipient",                           null: false
     t.string  "kind",                                null: false
