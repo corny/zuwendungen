@@ -14,24 +14,28 @@ module Source
     end
 
     def download_all
-      urls.each do |url|
-        uri  = URI(url)
-        file = directory.join(File.basename(uri.path))
+      urls.each do |filename,url|
+        file = directory.join(filename)
         if file.exist?
           logger.info "[#{state}] File exists: #{file}"
         else
           logger.info "[#{state}] Downloading #{url}"
-          res = Net::HTTP.get_response(uri)
+          res = Net::HTTP.get_response(URI(url))
           raise res.error! unless res.is_a?(Net::HTTPSuccess)
           file.open("wb"){|f| f << res.body }
         end
       end
     end
 
+    def import_file(path)
+      logger.info "[#{state}] Importing #{path}"
+      import path
+    end
+
     def import_all
       # skip hidden files
       directory.children.sort.reject{|c| c.basename.to_s.starts_with?('.') }.each do |entry|
-        import(entry)
+        import_file entry
       end
     end
 

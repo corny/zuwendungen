@@ -10,12 +10,10 @@ module Source
     }
 
     def urls
-      [
-        # 2012/2013
-        "https://ssl5.bremen.de/transparenzportal/sixcms/media.php/13/OpenData_Zuwendungsbericht%202013.xlsx",
-        # 2014/2015
-        "https://ssl5.bremen.de/transparenzportal/sixcms/media.php/13/2016-07-12_Zuwendungsbericht_2015_OpenData.xlsx"
-      ]
+      {
+        "2012-2013.xlsx" => "https://ssl5.bremen.de/transparenzportal/sixcms/media.php/13/OpenData_Zuwendungsbericht%202013.xlsx",
+        "2014-2015.xlsx" => "https://ssl5.bremen.de/transparenzportal/sixcms/media.php/13/2016-07-12_Zuwendungsbericht_2015_OpenData.xlsx"
+      }
     end
 
     def import(path)

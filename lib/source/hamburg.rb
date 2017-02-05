@@ -2,12 +2,10 @@ module Source
   class Hamburg < Base
 
     def urls
-      [
-        # Beginn 2010
-        "https://www.hamburg.de/contentblob/4292692/1463ba5948cc4ba386b5bbca417abd73/data/zuwendungsbericht-2011.xlsx",
-        # Beginn 2012
-        "http://www.hamburg.de/contentblob/4284536/data/zuwendungsbericht-2013.xlsx"
-      ]
+      {
+        "2010.xlsx" => "https://www.hamburg.de/contentblob/4292692/1463ba5948cc4ba386b5bbca417abd73/data/zuwendungsbericht-2011.xlsx",
+        "2012.xlsx" => "http://www.hamburg.de/contentblob/4284536/data/zuwendungsbericht-2013.xlsx"
+      }
     end
 
     def import(path)
