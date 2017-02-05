@@ -27,6 +27,7 @@ ActiveRecord::Schema.define(version: 20170205135452) do
     t.decimal "amount",     precision: 13, scale: 2, null: false
     t.index ["date_begin", "date_end", "state"], name: "index_donations_on_date_begin_and_date_end_and_state", using: :btree
     t.index ["donor"], name: "index_donations_on_donor", using: :btree
+    t.index ["purpose"], name: "index_donations_on_purpose", using: :btree
     t.index ["recipient"], name: "index_donations_on_recipient", using: :btree
     t.index ["state", "number"], name: "index_donations_on_state_and_number", unique: true, using: :btree
   end

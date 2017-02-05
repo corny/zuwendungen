@@ -1,0 +1,19 @@
+%h1 Zuwendungen
+
+%h2 Bundesländer
+
+- Donation.states.each do |state|
+  %h3= state
+
+  %table
+    %thead
+      %th Jahr
+      %th Förderungen
+      %th Summe
+    %tbody
+      - Donation.where(state: state).grouped_by_year.each do |row|
+        %tr
+          %td= row.year.to_i
+          %td= number_with_delimiter row.count
+          %td= number_to_currency row.amount
+          %td= link_to "Details", state_path(state)

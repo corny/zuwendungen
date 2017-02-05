@@ -23,5 +23,7 @@ module Donations
     # -- all .rb files in that directory are automatically loaded.
 
     config.autoload_paths << Rails.root.join('lib')
+
+    config.i18n.default_locale = :de
   end
 end

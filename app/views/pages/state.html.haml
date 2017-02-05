@@ -1,0 +1,15 @@
+%h1= params[:id]
+
+%h2 Top 50 Empfänger
+
+%table
+  %thead
+    %th Jahr
+    %th Förderungen
+    %th Summe
+  %tbody
+  - Donation.where(state: params[:id]).grouped_by_recipients.order("amount DESC").limit(50).each do |row|
+    %tr
+      %td= link_to row.recipient, donations_path(recipient: row.recipient)
+      %td= row.count
+      %td= number_to_currency row.amount
