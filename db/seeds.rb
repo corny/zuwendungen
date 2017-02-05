@@ -5,3 +5,15 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+
+Rails.root.join("lib/source").children.each do |child|
+  require child
+end
+
+Source::Base.subclasses.each do |sub|
+  source = sub.new
+  puts "[#{sub}] Downloading"
+  source.download_all
+  puts "[#{sub}] Importing"
+  source.import_all
+end
