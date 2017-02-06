@@ -11,28 +11,69 @@ module Source
 
     def urls
       {
+        "2009-2010.xls"  => "http://transparenz.bremen.de/sixcms/media.php/bremen02.a.13.de/download/Zuwendungsempf%E4nger_2009-2010.xls",
+        "2011.xlsx"      => "http://transparenz.bremen.de/sixcms/media.php/13/Zuwendungen_2011_2012.xlsx",
         "2012-2013.xlsx" => "https://ssl5.bremen.de/transparenzportal/sixcms/media.php/13/OpenData_Zuwendungsbericht%202013.xlsx",
-        "2014-2015.xlsx" => "https://ssl5.bremen.de/transparenzportal/sixcms/media.php/13/2016-07-12_Zuwendungsbericht_2015_OpenData.xlsx"
+        "2014-2015.xlsx" => "https://ssl5.bremen.de/transparenzportal/sixcms/media.php/13/2016-07-12_Zuwendungsbericht_2015_OpenData.xlsx",
       }
     end
 
     def import(path)
       sheet = SimpleSpreadsheet::Workbook.read(path)
+      years = File.basename(path).scan(/\d+/).map(&:to_i)
 
-      if sheet.cell(1,7)=="institutionelle Zuwendungen Bremens 2012" && sheet.cell(1,8)=="institutionelle Zuwendungen Bremens 2013"
-        import_2013(sheet)
-      elsif sheet.cell(1,5)=="Institutionelle Zuwendungen Bremens" && sheet.cell(1,6).nil?
-        import_2015(sheet)
+      if years[0] >= 2014
+        import_2014(sheet)
+      elsif years[0] >= 2011
+        import_2011(sheet, years)
+      elsif years[0] >= 2009
+        import_2009(sheet, years)
       else
         raise ArgumentError, "unsupported data"
       end
     end
 
-    def import_2013(sheet)
+    def import_2009(sheet, years)
+      # map column names to column numbers
+      columns = sheet.first_column.upto(sheet.last_column).map do |i|
+        if text = sheet.cell(2,i)
+          [text, i ]
+        end
+      end.compact.to_h
+
+
+      # iterate over data rows
+      4.upto(sheet.last_row).each do |line|
+        zweck = sheet.cell(line, columns['Zuwendungszweck bzw. Art der Leistungen'])
+        next unless zweck
+
+        years.each_with_index do |year,i|
+          amount = [
+            sheet.cell(line, columns['institutionelle Zuwendungen Bremens']+i),
+            sheet.cell(line, columns['Projektförderungen Bremens']+i),
+          ].map(&:presence).compact.sum
+
+          if amount != 0
+            update_donation(
+              number:     "#{year}-#{line}",
+              recipient:  sheet.cell(line, columns['Zuwendungsempfänger']),
+              purpose:    sheet.cell(line, columns['Zuwendungszweck bzw. Art der Leistungen']),
+              date_begin: "#{year}-01-01",
+              date_end:   "#{year}-12-31",
+              amount:     amount,
+              donor:      "keine Angabe",
+              kind:       "keine Angabe",
+            )
+          end
+        end
+      end
+    end
+
+    def import_2011(sheet, years)
       # map column names to column numbers
       columns = sheet.first_column.upto(sheet.last_column).map{|i| [sheet.cell(1,i), i] }.to_h
 
-      year_fields = [2012, 2013].map do |year|
+      year_fields = years.map do |year|
         [year, [
           "institutionelle Zuwendungen Bremens #{year}",
           "Projektförderungen Bremens #{year}",
@@ -44,23 +85,23 @@ module Source
       2.upto(sheet.last_row).each do |line|
         year_fields.each do |year,fields|
           amount = fields.map{|col| sheet.cell(line, columns[col]) }.compact.sum
-          if amount != 0
-            update_donation(
-              number:     "#{year}-#{line}",
-              recipient:  sheet.cell(line, columns['Zuwendungsempfänger']),
-              donor:      sheet.cell(line, columns['Ressort']),
-              purpose:    sheet.cell(line, columns['Zuwendungszweck bzw. Art der Leistungen']),
-              date_begin: "#{year}-01-01",
-              date_end:   "#{year}-12-31",
-              amount:     amount,
-              kind:       KINDS[sheet.cell(line, columns['Finan-zierungs-art'])].to_s,
-            )
-          end
+          next if amount == 0
+
+          update_donation(
+            number:     "#{year}-#{line}",
+            recipient:  sheet.cell(line, columns['Zuwendungsempfänger']),
+            donor:      sheet.cell(line, columns['Ressort']),
+            purpose:    sheet.cell(line, columns['Zuwendungszweck bzw. Art der Leistungen']),
+            date_begin: "#{year}-01-01",
+            date_end:   "#{year}-12-31",
+            amount:     amount,
+            kind:       KINDS[sheet.cell(line, columns['Finan-zierungs-art'])].to_s,
+          )
         end
       end
     end
 
-    def import_2015(sheet)
+    def import_2014(sheet)
       # map column names to column numbers
       columns = sheet.first_column.upto(sheet.last_column).map do |i|
         if text = sheet.cell(1,i)
