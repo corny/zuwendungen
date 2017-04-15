@@ -4,15 +4,19 @@ module Source
     def urls
       {
         "2010.xlsx" => "https://www.hamburg.de/contentblob/4292692/1463ba5948cc4ba386b5bbca417abd73/data/zuwendungsbericht-2011.xlsx",
-        "2012.xlsx" => "http://www.hamburg.de/contentblob/4284536/data/zuwendungsbericht-2013.xlsx",
+        "2012.xlsx" => "https://www.hamburg.de/contentblob/4284536/e1d55cba9347d61d1c4bc37f5c509410/data/zuwendungsbericht-2013.xlsx",
         "2014.xlsx" => "http://daten.transparenz.hamburg.de/Dataport.HmbTG.ZS.Webservice.GetRessource100/GetRessource100.svc/ac8c10a8-0d85-4f78-a37d-0a8bf31b1038/Zuwendungsvorgaenge_2014.xlsx",
         "2015-Q1.xlsx" => "http://daten.transparenz.hamburg.de/Dataport.HmbTG.ZS.Webservice.GetRessource100/GetRessource100.svc/e1c3783d-a43e-45ea-b7ea-d38b1b850728/Zuwendungsvorgaenge_2015_Quartal_1.xlsx",
         "2015-Q2.xlsx" => "http://daten.transparenz.hamburg.de/Dataport.HmbTG.ZS.Webservice.GetRessource100/GetRessource100.svc/d3fb7456-6f4b-4aec-8b13-f770960ecd69/Zuwendungsvorgaenge_2015_Quartal_2.xlsx",
-        # "2015-Q3.xlsx" => "",
+        # ist wirklich das dritte Quartal
+        # siehe: https://fragdenstaat.de/anfrage/zuwendungsberichte-ab-2014/#nachricht-65142
+        "2015-Q3.xlsx" => "http://daten.transparenz.hamburg.de/Dataport.HmbTG.ZS.Webservice.GetRessource100/GetRessource100.svc/810dc539-06bc-4630-9681-94f7bf6b6265/Zuwendungsvorgaenge_2015_Quartal_2.xlsx",
         "2015-Q4.xlsx" => "http://daten.transparenz.hamburg.de/Dataport.HmbTG.ZS.Webservice.GetRessource100/GetRessource100.svc/2fa6afe0-d5a2-4eb8-a115-e235efe618bb/Zuwendungsvorgaenge_2015_Quartal_4.xlsx",
         "2016-Q1.xlsx" => "http://daten.transparenz.hamburg.de/Dataport.HmbTG.ZS.Webservice.GetRessource100/GetRessource100.svc/2417b6a3-e293-4bce-898a-d8e0c671ea69/Zuwendungsvorgaenge_2016_Quartal_1.xlsx",
         "2016-Q2.xlsx" => "http://daten.transparenz.hamburg.de/Dataport.HmbTG.ZS.Webservice.GetRessource100/GetRessource100.svc/d39e663a-fd12-4dd6-b27c-cfdfbe673564/Zuwendungsvorgaenge_2016_Quartal_2.xlsx",
         "2016-Q3.xlsx" => "http://daten.transparenz.hamburg.de/Dataport.HmbTG.ZS.Webservice.GetRessource100/GetRessource100.svc/6d17cea7-f22b-4a57-a58b-7b681bca9cea/Zuwendungsvorgaenge_2016_Quartal_3.xlsx",
+        "2016-Q4.xlsx" => "http://daten.transparenz.hamburg.de/Dataport.HmbTG.ZS.Webservice.GetRessource100/GetRessource100.svc/4fea0df1-90fc-47e0-b765-db5314c93835/Zuwendungsvorgaenge_2016_Quartal_4.xlsx",
+        "2017-Q1.xlsx" => "http://daten.transparenz.hamburg.de/Dataport.HmbTG.ZS.Webservice.GetRessource100/GetRessource100.svc/c6659048-d0e9-4edc-8d0a-161868d20151/Zuwendungsvorgaenge_2017_Quartal_1.xlsx",
       }
     end
 
