@@ -12,7 +12,7 @@ module Source
     end
 
     def directory
-      Rails.root.join("tmp/downloads", state).tap(&:mkpath)
+      Rails.root.join("public/data", state).tap(&:mkpath)
     end
 
     def download_all
