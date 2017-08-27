@@ -18,6 +18,7 @@ module Source
 
       (0...(rows.size)).step(2).each do |i|
         data = (rows[i].elements + rows[i+1].elements).map{|e| [e['headers'], e.text] }.to_h
+        next if data['Betrag'].blank?
 
         update_donation(
           number:     "#{data['Jahr']}-#{i/2}",
