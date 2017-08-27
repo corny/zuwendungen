@@ -217,3 +217,15 @@ de:
       long: "%A, %d. %B %Y, %H:%M Uhr"
       short: "%d. %B, %H:%M Uhr"
     pm: nachmittags
+
+  i18n:
+    transliterate:
+      rule:
+        ä: "ae"
+        é: "e"
+        ü: "ue"
+        ö: "oe"
+        Ä: "Ae"
+        Ü: "Ue"
+        Ö: "Oe"
+        ß: "ss"
