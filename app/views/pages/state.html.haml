@@ -3,8 +3,15 @@
     Zuwendungen in
     = params[:id]
 
-%h2 Top 50 Empfänger
+%h2 Quellen
+%p
+  = link_to "Alle Daten von #{params[:id]} als CSV", "/data/#{params[:id]}.csv", 'data-turbolinks' => 'false'
+%ul
+  -  "Source::#{params[:id]}".constantize.new.urls.each do |key, value|
+    %li= link_to key, value
 
+
+%h2 Top 50 Empfänger
 %table.table.table-striped
   %thead
     %th Empfänger

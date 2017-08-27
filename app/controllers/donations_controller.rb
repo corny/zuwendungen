@@ -1,3 +1,5 @@
+require 'source/all'
+
 class DonationsController < ApplicationController
 
   def index
