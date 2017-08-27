@@ -1,5 +1,7 @@
 class Donation < ApplicationRecord
 
+  belongs_to :recipient
+
   scope :purpose, ->(val) { where(purpose: val) }
   scope :recipient, ->(val) { where(recipient: val) }
 
@@ -12,7 +14,7 @@ class Donation < ApplicationRecord
   end
 
   def self.grouped_by_recipients
-    select("recipient, COUNT(*) count, SUM(amount) amount").group(:recipient)
+    select("recipient_id, COUNT(*) count, SUM(amount) amount").group(:recipient_id)
   end
 
 end

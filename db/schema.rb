@@ -15,21 +15,30 @@ ActiveRecord::Schema.define(version: 20170205135452) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "donations", force: :cascade do |t|
-    t.date    "date_begin",                          null: false
-    t.date    "date_end",                            null: false
-    t.string  "state",                               null: false
-    t.string  "number"
-    t.string  "donor",                               null: false
-    t.string  "recipient",                           null: false
-    t.string  "kind",                                null: false
-    t.string  "purpose",                             null: false
-    t.decimal "amount",     precision: 13, scale: 2, null: false
-    t.index ["date_begin", "date_end", "state"], name: "index_donations_on_date_begin_and_date_end_and_state", using: :btree
-    t.index ["donor"], name: "index_donations_on_donor", using: :btree
-    t.index ["purpose"], name: "index_donations_on_purpose", using: :btree
-    t.index ["recipient"], name: "index_donations_on_recipient", using: :btree
-    t.index ["state", "number"], name: "index_donations_on_state_and_number", unique: true, using: :btree
+  create_table "donations", id: :serial, force: :cascade do |t|
+    t.date "date_begin", null: false
+    t.date "date_end", null: false
+    t.string "state", null: false
+    t.string "number"
+    t.string "donor", null: false
+    t.string "recipient_name", null: false
+    t.integer "recipient_id", null: false
+    t.string "kind", null: false
+    t.string "purpose", null: false
+    t.decimal "amount", precision: 13, scale: 2, null: false
+    t.index ["date_begin", "date_end", "state"], name: "index_donations_on_date_begin_and_date_end_and_state"
+    t.index ["donor"], name: "index_donations_on_donor"
+    t.index ["purpose"], name: "index_donations_on_purpose"
+    t.index ["recipient_id"], name: "index_donations_on_recipient_id"
+    t.index ["state", "number"], name: "index_donations_on_state_and_number", unique: true
   end
 
+  create_table "recipients", force: :cascade do |t|
+    t.string "name", null: false
+    t.string "slug", null: false
+    t.index ["name"], name: "index_recipients_on_name", unique: true
+    t.index ["slug"], name: "index_recipients_on_slug", unique: true
+  end
+
+  add_foreign_key "donations", "recipients"
 end

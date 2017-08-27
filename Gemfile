@@ -31,8 +31,6 @@ gem 'turbolinks', '~> 5'
 
 gem 'simple-spreadsheet'
 
-gem 'has_scope'
-
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 

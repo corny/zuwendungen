@@ -5,8 +5,9 @@ class CreateDonations < ActiveRecord::Migration[5.0]
       t.date    :date_end,   null: false
       t.string  :state,      null: false
       t.string  :number
-      t.string  :donor,      null: false, index: true
-      t.string  :recipient,  null: false, index: true
+      t.string  :donor,          null: false, index: true
+      t.string  :recipient_name, null: false
+      t.references :recipient, null: false, foreign_key: true
       t.string  :kind,       null: false
       t.string  :purpose,    null: false, index: true
       t.decimal :amount,     null: false, precision: 13, scale: 2

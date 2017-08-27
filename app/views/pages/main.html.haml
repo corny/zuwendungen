@@ -4,6 +4,7 @@
 
 - uniq_states.each do |state|
   %h3= state
+  %p= link_to "Alle Daten zu #{state}", state_path(state)
 
   %table.table.table-striped
     %thead
@@ -16,4 +17,3 @@
           %td= row.year.to_i
           %td.number= number_with_delimiter row.count
           %td.number= number_to_currency row.amount
-          %td= link_to "Details", state_path(state)

@@ -43,10 +43,14 @@ module Source
 
     def update_donation(attributes)
       Donation.transaction do
+        recipient = attributes.delete(:recipient)
         Donation.find_or_initialize_by(
           state:  state,
           number: attributes[:number],
-        ).update_attributes! attributes
+        ).update_attributes!(attributes.merge(
+          recipient_name: recipient,
+          recipient: Recipient.get(recipient),
+        ))
       end
     end
   end
