@@ -4,7 +4,7 @@ module Source
     def urls
       # XLS files are broken. ruby-ole-1.2.12 fails with:
       # Ole::Storage::FormatError: OLE2 signature is invalid
-      (2010..2015).map do |year|
+      (2010..2016).map do |year|
         [
           "#{year}.html",
           "https://www.berlin.de/sen/finanzen/service/zuwendungsdatenbank/index.php/index/print.html?q&jahr=#{year}",
