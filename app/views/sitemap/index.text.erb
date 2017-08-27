@@ -1,0 +1,3 @@
+<% Recipient.find_each do |recipient| %>
+<%= recipient_url(recipient.slug) %>
+<% end %>
