@@ -8,8 +8,6 @@
     %title= content_for?(:title) ? yield(:title) : "Zuwendungen"
     = csrf_meta_tags
     = stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload'
-    = favicon_link_tag 'apple-touch-icon-precomposed.png', :rel => 'apple-touch-icon-precomposed', :type => 'image/png'
-    = favicon_link_tag 'favicon.ico', :rel => 'shortcut icon'
     = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
   %body
     = render 'shared/header'
