@@ -18,7 +18,7 @@
     %th.number Anzahl
     %th.number Summe
   %tbody
-    - Donation.where(state: params[:id]).grouped_by_recipients.joins(:recipient).order("amount DESC").limit(50).each do |row|
+    - @donations.each do |row|
       %tr
         %td= link_to row.recipient, recipient_path(row.recipient.slug)
         %td.number= row.count
