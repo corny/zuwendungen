@@ -22,6 +22,11 @@ class DonationsController < ApplicationController
     if @donations.empty?
       raise ActiveRecord::RecordNotFound, "empty result"
     end
+
+    respond_to do |format|
+      format.html
+      format.csv { render csv: @donations }
+    end
   end
 
 end

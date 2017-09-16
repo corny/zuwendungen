@@ -6,6 +6,20 @@
     - if @purpose
       für #{@purpose}
 
+%p
+  Hier sind alle
+  = link_to 'Zuwendungen', :root
+  - if @recipient
+    an
+    %strong= @recipient
+  - if @purpose
+    für
+    %strong= @purpose
+  gesammlt.
+
+  Download als
+  = link_to "CSV", params.permit(:recipient_slug, :purpose).merge(format: 'csv')
+
 %table.table.table-striped
   %thead
     %th Von

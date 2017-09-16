@@ -3,6 +3,13 @@
     Zuwendungen in
     = params[:id]
 
+%p
+  Hier sind alle
+  = link_to 'Zuwendungen', :root
+  des Landes
+  %strong= params[:id]
+  an Stellen außerhalb der Verwaltung gesammlt.
+
 %h2 Quellen
 %p
   = link_to "Alle Daten von #{params[:id]} als CSV", "/data/#{params[:id]}.csv", 'data-turbolinks' => 'false'

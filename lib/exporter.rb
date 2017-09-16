@@ -10,10 +10,14 @@ module Exporter
 
   def self.export(path, donations)
     CSV.open(path, 'w') do |csv|
-      csv << %w(date_begin date_end state number donor recipient kind purpose amount)
-      donations.find_each do |row|
-        csv << %w(date_begin date_end state number donor recipient_name kind purpose amount).map{|key| row.send(key) }
-      end
+      generate(csv, donations)
+    end
+  end
+
+  def self.generate(csv, donations)
+    csv << %w(date_begin date_end state number donor recipient kind purpose amount)
+    donations.find_each do |row|
+      csv << %w(date_begin date_end state number donor recipient_name kind purpose amount).map{|key| row.send(key) }
     end
   end
 
