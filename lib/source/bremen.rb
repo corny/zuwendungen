@@ -15,6 +15,7 @@ module Source
         "2011.xlsx"      => "http://transparenz.bremen.de/sixcms/media.php/13/Zuwendungen_2011_2012.xlsx",
         "2012-2013.xlsx" => "https://ssl5.bremen.de/transparenzportal/sixcms/media.php/13/OpenData_Zuwendungsbericht%202013.xlsx",
         "2014-2015.xlsx" => "https://ssl5.bremen.de/transparenzportal/sixcms/media.php/13/2016-07-12_Zuwendungsbericht_2015_OpenData.xlsx",
+        "2017.xlsx"      => "https://ssl.bremen.de/finanzen/sixcms/media.php/13/Zuwendungen%2B2.%2BQuartalsbericht%2B2017.xlsx",
       }
     end
 
@@ -22,7 +23,9 @@ module Source
       sheet = SimpleSpreadsheet::Workbook.read(path)
       years = File.basename(path).scan(/\d+/).map(&:to_i)
 
-      if years[0] >= 2014
+      if years[0] >= 2017
+        import_2017(sheet)
+      elsif years[0] >= 2014
         import_2014(sheet)
       elsif years[0] >= 2011
         import_2011(sheet, years)
@@ -136,6 +139,37 @@ module Source
             )
           end
         end
+      end
+    end
+
+    def import_2017(sheet)
+      year = sheet.cell(3,2)
+      raise "invalid year: #{year}" if year !~ /\A20\d\d\z/
+
+      columns = sheet.first_column.upto(sheet.last_column).map do |i|
+        if text = sheet.cell(7,i)
+          [
+            text.gsub(/-?\n/,"").strip,
+            i,
+          ]
+        end
+      end.compact.to_h
+
+      # iterate over data rows
+      8.upto(sheet.last_row).each do |line,i|
+        gkz = sheet.cell(line, columns['GKZ'])
+        next unless gkz
+
+        update_donation(
+          number:     gkz,
+          recipient:  sheet.cell(line, columns['Antragsteller / Zuwendungsempfänger']),
+          donor:      sheet.cell(line, columns['Ressort/Dienststelle']),
+          purpose:    sheet.cell(line, columns['Zuwendungszweck']),
+          date_begin: "#{year}-01-01",
+          date_end:   "#{year}-12-31",
+          amount:     sheet.cell(line, columns['Zuwendungssumme']),
+          kind:       KINDS[sheet.cell(line, columns['Finanzierungsart'])].to_s,
+        )
       end
     end
 
