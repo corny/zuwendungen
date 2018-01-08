@@ -15,7 +15,7 @@ module Source
         "2011.xlsx"      => "http://transparenz.bremen.de/sixcms/media.php/13/Zuwendungen_2011_2012.xlsx",
         "2012-2013.xlsx" => "https://ssl5.bremen.de/transparenzportal/sixcms/media.php/13/OpenData_Zuwendungsbericht%202013.xlsx",
         "2014-2015.xlsx" => "https://ssl5.bremen.de/transparenzportal/sixcms/media.php/13/2016-07-12_Zuwendungsbericht_2015_OpenData.xlsx",
-        "2017.xlsx"      => "https://ssl.bremen.de/finanzen/sixcms/media.php/13/Zuwendungen%2B2.%2BQuartalsbericht%2B2017.xlsx",
+        "2017.xlsx"      => "https://www.finanzen.bremen.de/sixcms/media.php/13/Zuwendungen%2B3.%2BQuartalsbericht%2B2017.xlsx",
       }
     end
 
