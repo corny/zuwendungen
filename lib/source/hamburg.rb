@@ -19,6 +19,7 @@ module Source
         "2017-Q1.xlsx" => "http://daten.transparenz.hamburg.de/Dataport.HmbTG.ZS.Webservice.GetRessource100/GetRessource100.svc/c6659048-d0e9-4edc-8d0a-161868d20151/Zuwendungsvorgaenge_2017_Quartal_1.xlsx",
         "2017-Q2.xlsx" => "http://daten.transparenz.hamburg.de/Dataport.HmbTG.ZS.Webservice.GetRessource100/GetRessource100.svc/544cccf0-e804-4702-9139-a7391c4cd08c/Zuwendungsvorgaenge_2017_Quartal_2.xlsx",
         "2017-Q3.xlsx" => "http://daten.transparenz.hamburg.de/Dataport.HmbTG.ZS.Webservice.GetRessource100/GetRessource100.svc/ee7d6285-358c-43fb-9a38-7062212cd670/Zuwendungsvorgaenge_2017_Quartal_3.xlsx",
+        "2017-Q4.xlsx" => "http://daten.transparenz.hamburg.de/Dataport.HmbTG.ZS.Webservice.GetRessource100/GetRessource100.svc/d0ccda55-fee6-461c-a402-288aca39e7fd/Zuwendungsvorgaenge_2017_Quartal_4.xlsx",
       }
     end
 
