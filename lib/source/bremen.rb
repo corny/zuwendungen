@@ -144,7 +144,7 @@ module Source
     end
 
     def import_2017(sheet)
-      year = sheet.cell(3,2)
+      year = sheet.cell(3,2).to_s
       raise "invalid year: #{year}" if year !~ /\A20\d\d\z/
 
       columns = sheet.first_column.upto(sheet.last_column).map do |i|
